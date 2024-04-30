@@ -1,15 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
 
-import { cakeReducer, cakeActions } from "../features/cake/cakeSlice";
-import {
-  icecreamReducer,
-  icecreamActions,
+import cakeReducer, {
+  ordered as cakeOrdered,
+  restocked as cakeRestocked,
+} from "../features/cake/cakeSlice";
+import icecreamReducer, {
+  ordered as icecreamOrdered,
+  restocked as icecreamRestocked,
 } from "../features/icecream/icecreamSlice";
 
-import { userReducer, fetchUsers } from "../features/user/userSlice";
+import userReducer, { fetchUsers } from "../features/user/userSlice";
 
-const logger = createLogger();
+// const logger = createLogger();
 
 export const store = configureStore({
   reducer: {
@@ -17,23 +20,23 @@ export const store = configureStore({
     icecream: icecreamReducer,
     user: userReducer,
   },
-  middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(logger),
+  // middleware: (getDefaultMiddleWare) => getDefaultMiddleWare().concat(logger),
 });
 
-console.log("initalState", store.getState());
+// console.log("initalState", store.getState());
 // const unsubscribe = store.subscribe(() => {
 //   console.log("updatedState", store.getState());
 // });
 
-store.dispatch(fetchUsers());
+// store.dispatch(fetchUsers());
 
-// store.dispatch(cakeActions.ordered(4));
-// store.dispatch(cakeActions.ordered(1));
-// store.dispatch(cakeActions.restocked(10));
+// store.dispatch(cakeOrdered(4));
+// store.dispatch(cakeOrdered(1));
+// store.dispatch(cakeRestocked(10));
 
-// store.dispatch(icecreamActions.ordered(2));
-// store.dispatch(icecreamActions.ordered(5));
-// store.dispatch(icecreamActions.ordered(1));
-// store.dispatch(icecreamActions.restocked(12));
+// store.dispatch(icecreamOrdered(2));
+// store.dispatch(icecreamOrdered(5));
+// store.dispatch(icecreamOrdered(1));
+// store.dispatch(icecreamRestocked(12));
 
 // unsubscribe();

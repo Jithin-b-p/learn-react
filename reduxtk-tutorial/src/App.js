@@ -1,10 +1,17 @@
 import { store } from "./redux/store";
 import { Provider } from "react-redux";
 
+import CakeView from "./features/cake/CakeView";
+
+import UserView from "./features/user/UserView";
+import IcecreamView from "./features/icecream/IcecreamView";
+
 function App() {
   return (
     <Provider store={store}>
-      <div>hai</div>
+      <CakeView />
+      <IcecreamView />
+      <UserView />
     </Provider>
   );
 }

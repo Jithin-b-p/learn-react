@@ -1,0 +1,23 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.foldercontainer {
+}
+.folderstyle {
+  background-color: antiquewhite;
+  display: flex;
+  justify-content: space-between;
+}
+
+.commonstyle {
+  padding: 0.2rem 0.3rem;
+  cursor: pointer;
+  margin-top: 5px;
+  max-width: 20rem;
+}
+
+button {
+  cursor: pointer;
+}

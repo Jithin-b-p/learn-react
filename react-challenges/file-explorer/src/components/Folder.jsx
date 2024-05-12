@@ -40,7 +40,7 @@ export default function Folder({ explorer, handleNewCreation }) {
         )}
       </div>
 
-      {showFolderContent && explorer.items.length > 0 && (
+      {showFolderContent && (
         <div style={{ paddingLeft: "25px" }}>
           {showInput.visible && (
             <div>
@@ -54,7 +54,11 @@ export default function Folder({ explorer, handleNewCreation }) {
             </div>
           )}
           {explorer.items.map((exp) => (
-            <Folder key={exp.id} explorer={exp} />
+            <Folder
+              key={exp.id}
+              explorer={exp}
+              handleNewCreation={handleNewCreation}
+            />
           ))}
         </div>
       )}

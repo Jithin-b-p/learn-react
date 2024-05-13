@@ -29,6 +29,10 @@ main {
   gap: 1.2rem;
 }
 
+.btns-tenure {
+  display: flex;
+  justify-content: space-between;
+}
 .input-title {
   font-size: 0.875rem;
   font-weight: 500;
@@ -46,4 +50,20 @@ main {
 .labels {
   display: flex;
   justify-content: space-between;
+}
+
+.btn-tenure {
+  padding: 0.8rem 1.5rem;
+  display: flex;
+
+  font-weight: 500;
+
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+
+.btn-tenure--select {
+  background-color: rgb(27, 140, 253);
+  color: white;
 }

@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import { tenures } from "./util/constants";
+
 const App = () => {
   const [cost, setCost] = useState(0);
   const [interest, setInterest] = useState(0);
@@ -7,19 +10,47 @@ const App = () => {
   const [tenure, setTenure] = useState(12);
   const [emi, setEmi] = useState(0);
 
-  const calculateEMI = () => {};
+  const calculateEMI = (downPayment) => {
+    if (!cost) return;
+
+    const loanAmount = cost - downPayment;
+    const rateOfInterest = interest;
+    const years = tenure / 12;
+
+    const emiPerYear =
+      (loanAmount * rateOfInterest * (1 + rateOfInterest) ** years) /
+      (1 + rateOfInterest) ** (years - 1);
+    console.log(emiPerYear);
+    return Number(emiPerYear / 12).toFixed(0);
+  };
+
+  const calculateDownPayment = (emi) => {
+    if (!cost) return;
+
+    const dp = 100 - (emi / calculateEMI(0)) * 100;
+    return Number(((dp / 100) * cost).toFixed(0));
+  };
+
   const updateEMI = (e) => {
     if (!cost) return;
 
     const dp = Number(e.target.value);
     setDownPayment(dp);
+
+    const emi = calculateEMI(dp);
+    setEmi(emi);
   };
+
   const updateDownPayment = (e) => {
     if (!cost) return;
 
-    const emi = Number(e.target.value);
+    const emi = Number(e.target.value).toFixed(0);
     setEmi(emi);
+
+    const dp = calculateDownPayment(emi);
+    setDownPayment(dp);
   };
+
   return (
     <main>
       <h1 className="title">EMI Calculator</h1>
@@ -30,7 +61,7 @@ const App = () => {
           <input
             type="text"
             value={cost}
-            onChange={(e) => setCost(e.target.value)}
+            onChange={(e) => setCost(Number(e.target.value))}
           />
         </div>
         <div className="calculator__input calculator__input--interest">
@@ -38,7 +69,7 @@ const App = () => {
           <input
             type="text"
             value={interest}
-            onChange={(e) => setInterest(e.target.value)}
+            onChange={(e) => setInterest(Number(e.target.value))}
           />
         </div>
         <div className="calculator__input calculator__input--fee">
@@ -47,7 +78,7 @@ const App = () => {
           <input
             type="text"
             value={fee}
-            onChange={(e) => setFee(e.target.value)}
+            onChange={(e) => setFee(Number(e.target.value))}
           />
         </div>
         <div className="calculator__input calculator__input--downpayment">
@@ -84,13 +115,26 @@ const App = () => {
           />
           <div className="labels">
             <span>0%</span>
-            <span>{emi}</span>
+            <span>₹{emi}</span>
             <span>100%</span>
           </div>
         </div>
 
         <div className="calculator__input calculator__input--tenure">
           <span className="input-title">Tenure</span>
+          <div className="btns-tenure">
+            {tenures.map((value) => (
+              <button
+                className={`btn btn-tenure ${
+                  tenure === value ? "btn-tenure--select" : ""
+                }`}
+                key={value}
+                onClick={() => setTenure(value)}
+              >
+                {value}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </main>

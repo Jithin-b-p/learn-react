@@ -4,10 +4,10 @@ greet should render the text hello and if a name is passed into the component it
 
 import { render, screen } from "@testing-library/react";
 
-import Greet from "./Greet";
+import Greet from "../components/greet/Greet";
 
 describe.only("Greet", () => {
-  it("renders correctly", () => {
+  test("renders correctly", () => {
     render(<Greet />);
     const element = screen.getByText(/hello/i);
 
@@ -15,7 +15,7 @@ describe.only("Greet", () => {
   });
 
   describe("Nested", () => {
-    it("renders with a name", () => {
+    test("renders with a name", () => {
       render(<Greet name="Jithin" />);
 
       const textElement = screen.getByText(/hello, jithin/i);

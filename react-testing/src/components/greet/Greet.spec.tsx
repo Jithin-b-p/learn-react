@@ -7,7 +7,7 @@ import { render, screen } from "@testing-library/react";
 import Greet from "./Greet";
 
 describe.only("Greet", () => {
-  it("renders correctly", () => {
+  fit("renders correctly", () => {
     render(<Greet />);
     const element = screen.getByText(/hello/i);
 
@@ -15,7 +15,7 @@ describe.only("Greet", () => {
   });
 
   describe("Nested", () => {
-    it("renders with a name", () => {
+    xit("renders with a name", () => {
       render(<Greet name="Jithin" />);
 
       const textElement = screen.getByText(/hello, jithin/i);

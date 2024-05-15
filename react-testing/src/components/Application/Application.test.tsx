@@ -24,6 +24,14 @@ describe("Application", () => {
 
     const nameElement = screen.getByRole("textbox", { name: "Name" });
     expect(nameElement).toBeInTheDocument();
+    // const nameElement2 = screen.getByLabelText("Name");
+    // expect(nameElement2).toBeInTheDocument();
+    // if our section has a label of Name same as textbox
+    // we can use the option to be more specific about our element
+    const nameElement3 = screen.getByLabelText("Name", {
+      selector: "input",
+    });
+    expect(nameElement3).toBeInTheDocument();
 
     const jobLocationElement = screen.getByRole("combobox");
     expect(jobLocationElement).toBeInTheDocument();
@@ -35,6 +43,10 @@ describe("Application", () => {
 
     const termsElement = screen.getByRole("checkbox");
     expect(termsElement).toBeInTheDocument();
+    const termElement2 = screen.getByLabelText(
+      "I agree to the terms and conditions"
+    );
+    expect(termElement2).toBeInTheDocument();
 
     const submitButtonElement = screen.getByRole("button");
     expect(submitButtonElement).toBeInTheDocument();

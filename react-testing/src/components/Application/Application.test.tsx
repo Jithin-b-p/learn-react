@@ -22,6 +22,18 @@ describe("Application", () => {
     const sectionHeading = screen.getByRole("heading", { level: 2 });
     expect(sectionHeading).toBeInTheDocument();
 
+    const imageElment = screen.getByAltText("a person with a laptop");
+    expect(imageElment).toBeInTheDocument();
+
+    const textElement = screen.getByText("All fields are mandatory");
+    expect(textElement).toBeInTheDocument();
+
+    const closeElement = screen.getByTitle("close");
+    expect(closeElement).toBeInTheDocument();
+
+    const customElement = screen.getByTestId("custom-element");
+    expect(customElement).toBeInTheDocument();
+
     const nameElement = screen.getByRole("textbox", { name: "Name" });
     expect(nameElement).toBeInTheDocument();
     // const nameElement2 = screen.getByLabelText("Name");
@@ -32,6 +44,10 @@ describe("Application", () => {
       selector: "input",
     });
     expect(nameElement3).toBeInTheDocument();
+    const nameElement4 = screen.getByPlaceholderText("Fullname");
+    expect(nameElement4).toBeInTheDocument();
+    const nameElement5 = screen.getByDisplayValue("Jithin");
+    expect(nameElement5).toBeInTheDocument();
 
     const jobLocationElement = screen.getByRole("combobox");
     expect(jobLocationElement).toBeInTheDocument();

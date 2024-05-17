@@ -29,4 +29,34 @@ describe("Counter", () => {
     const countElement = screen.getByRole("heading");
     expect(countElement).toHaveTextContent("1");
   });
+
+  // keyboard interaction
+  test("renders a count of 10 after clicking the set button", async () => {
+    user.setup();
+    render(<Counter />);
+    // logRoles(view.container);
+    const amountInput = screen.getByRole("spinbutton");
+    await user.type(amountInput, "10");
+    expect(amountInput).toHaveValue(10);
+
+    const setBtn = screen.getByRole("button", { name: "Set" });
+    await user.click(setBtn);
+    const countElement = screen.getByRole("heading");
+    expect(countElement).toHaveTextContent("10");
+  });
+
+  test("elements are focused in the right order", async () => {
+    user.setup();
+    render(<Counter />);
+    const amountInput = screen.getByRole("spinbutton");
+    const setBtn = screen.getByRole("button", { name: "Set" });
+    const incrementBtn = screen.getByRole("button", { name: "Increment" });
+
+    await user.tab();
+    expect(incrementBtn).toHaveFocus();
+    await user.tab();
+    expect(amountInput).toHaveFocus();
+    await user.tab();
+    expect(setBtn).toHaveFocus();
+  });
 });

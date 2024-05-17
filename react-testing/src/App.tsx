@@ -1,10 +1,13 @@
-import { Application } from "./components/Application/Application";
+import { MuiMode } from "./components/mui/MuiMode";
+import { AppProviders } from "./components/providers/AppProviders";
 
 const App = () => {
   return (
-    <div>
-      <Application />
-    </div>
+    <AppProviders>
+      <div className="App">
+        <MuiMode />
+      </div>
+    </AppProviders>
   );
 };
 

@@ -1,40 +1,45 @@
-import React from "react";
 import styled from "@emotion/styled";
 import Fieldset from "./Fieldset";
 import Field from "./Field";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type SigninFormType = {
   email: string;
   password: string;
 };
 
-const handleOnSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-  event.preventDefault();
-  const formData = new FormData(event.target as HTMLFormElement);
-  console.log(formData.get("password"));
-};
-
 function App() {
   //One of the key benefits of react-hook-form library is that it simplifies state management, eliminating the need for multiple useState hooks.
-  const {
-    register,
-    formState: { errors },
-  } = useForm<SigninFormType>();
+  const { register, handleSubmit, formState } = useForm<SigninFormType>();
+  const { errors } = formState;
+
+  const onSubmit: SubmitHandler<SigninFormType> = (data) => {
+    console.log(data);
+  };
 
   return (
-    <Form onSubmit={handleOnSubmit}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Fieldset legend="Sign up">
         <Field label="email" htmlFor="email" error={errors.email?.message}>
           <input
-            {...register("email", { required: true })}
+            {...register("email", {
+              required: "email ID required",
+              validate: (value) => value.includes("@") || "not an email format",
+            })}
             id="email"
             type="text"
           />
         </Field>
-        <Field label="password" htmlFor="password">
+        <Field
+          label="password"
+          htmlFor="password"
+          error={errors.password?.message}
+        >
           <input
-            {...register("password", { required: true, min: 8 })}
+            {...register("password", {
+              required: "password required",
+              minLength: { value: 8, message: "length must be greater than 8" },
+            })}
             id="password"
             type="password"
           />

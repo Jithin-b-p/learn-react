@@ -25,5 +25,7 @@ const Container = styled.div`
   gap: 0.2rem;
 `;
 const Label = styled.label``;
-const Error = styled.div``;
+const Error = styled.div`
+  color: red;
+`;
 export default Field;

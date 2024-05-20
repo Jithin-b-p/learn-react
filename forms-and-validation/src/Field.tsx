@@ -9,6 +9,7 @@ type FieldProps = {
 
 function Field({ label, htmlFor, error, children }: FieldProps) {
   const id = htmlFor;
+  console.log(error);
   return (
     <Container>
       {label && <Label htmlFor={id}>{label}</Label>}

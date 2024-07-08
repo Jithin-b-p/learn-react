@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { tenures } from "./util/constants";
 
@@ -20,7 +20,7 @@ const App = () => {
     const emiPerYear =
       (loanAmount * rateOfInterest * (1 + rateOfInterest) ** years) /
       (1 + rateOfInterest) ** (years - 1);
-    console.log(emiPerYear);
+
     return Number(emiPerYear / 12).toFixed(0);
   };
 
@@ -51,6 +51,15 @@ const App = () => {
     setDownPayment(dp);
   };
 
+  useEffect(() => {
+    if (!(cost > 0)) {
+      setDownPayment(0);
+      setEmi(0);
+    }
+
+    const emi = calculateEMI(downPayment);
+    setEmi(emi);
+  }, [tenure]);
   return (
     <main>
       <h1 className="title">EMI Calculator</h1>

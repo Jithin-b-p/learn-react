@@ -1,4 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export const NEXT_AUTH_OPTION = {
   providers: [
@@ -19,6 +20,11 @@ export const NEXT_AUTH_OPTION = {
         // here provide the authorization logic here (like check the db for user validation) if the user present return object else return null or false.
         return { id: 1, email: credentials?.email } as any;
       },
+    }),
+
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
   ],
 

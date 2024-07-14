@@ -7,7 +7,7 @@ const handler = NextAuth({
       name: "Email",
       //The credentials is used to generate a suitable form on the sign in page. (what are fields that are needed can be specified here)
       credentials: {
-        username: { label: "email", type: "text", placeholder: "Email" },
+        email: { label: "email", type: "text", placeholder: "Email" },
         password: {
           label: "password",
           type: "passoword",
@@ -21,6 +21,10 @@ const handler = NextAuth({
       },
     }),
   ],
+
+  pages: {
+    signIn: "api/auth/signin",
+  },
 });
 
 export { handler as GET, handler as POST };

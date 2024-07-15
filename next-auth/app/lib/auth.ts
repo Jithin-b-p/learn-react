@@ -1,4 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
+import Github from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 
 export const NEXT_AUTH_OPTION = {
@@ -26,6 +27,8 @@ export const NEXT_AUTH_OPTION = {
       clientId: process.env.GOOGLE_CLIENT_ID || "",
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
+
+    Github({}),
   ],
 
   secret: process.env.NEXTAUTH_SECRET,

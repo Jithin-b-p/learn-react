@@ -16,6 +16,7 @@ import { NextRequest, NextResponse } from "next/server";
 //   matcher: "/api/:path*",
 // };
 
+// redirecting the url with middleware
 export function middleware(req: NextRequest) {
   if (req.nextUrl.pathname.startsWith("/user")) {
     return NextResponse.redirect(new URL("/about", req.url));
